@@ -1,82 +1,71 @@
-CIS4400 - Homework 1
-
-Student: Alex Temurov Dataset: NYC Yellow Taxi Trip Data
-
----
+CIS4400 - Homework 1, Alex Temurov, NYC Yellow Taxi Trip Data  
 
 Business Requirements
 
-Each night in New York City, thousands of yellow taxis traverse the grid, picking up and dropping off passengers, or remaining idle in less optimal locations while demand exists nearby. These inefficiencies are not random; they follow discernible patterns that are evident in the data.
+Every night in New York City, thousands of yellow taxis are picking up and dropping off passengers across the city. A lot of the time though, drivers are sitting idle in areas where theres not much demand, while other areas are packed. These patterns are not random and can actually be tracked through the data.
 
-This project involves building a data warehouse from NYC yellow taxi trip records. The objective is to provide taxi operators and city planners with a clear, queryable representation of passenger movement, enabling proactive vehicle positioning to efficiently meet demand.
+This project is about building a data warehouse using NYC yellow taxi trip records. The goal is to give taxi operators and city planners a way to better understand how people are moving around the city so they can make smarter decisions.
 
-Three questions drive everything:
+Three main questions drive this project:
 
-1. When and where is demand highest? The analysis aims to identify specific intersections, hours, and days that experience increased demand, such as during inclement weather or peak times. This information enables dispatchers to position drivers proactively, rather than reactively.
-2. How do fares vary across the city? For example, trips from Midtown to JFK differ significantly from those between Inwood and the Bronx. Analyzing fare amounts by neighborhood and time of day reveals pricing patterns that may not be apparent to drivers or passengers.
-3. Are certain routes genuinely faster, or merely shorter in distance? Analyzing average trip duration by corridor identifies areas where traffic consistently causes delays. This information is valuable for optimizing routing and for broader urban analysis.
-
----
+1. When and where is demand the highest? The idea is to find the specific hours, days and locations where taxis are most needed, so dispatchers can position drivers ahead of time instead of reacting after the fact.
+2. How do fares change depending on the area? Trips from Midtown to JFK are very different from trips in the Bronx for example. Looking at fare amounts by neighborhood and time of day can reveal patterns that arent always obvious.
+3. Are some routes actually faster or just shorter? By looking at average trip duration on different routes we can identify where traffic is consistently causing delays, which is useful for both drivers and urban planners.
 
 Functional Requirements
 
-To enable this analysis, the system must reliably perform five key functions:
+To make this analysis possible, the system needs to be able to do the following:
 
-1. Pull live trip data directly from the Store and store it in a structured warehouse that is organized, clean, and easily queryable.
-2. Enable users to filter data by date, time, and pickup or dropoff location without accessing the raw source.
-3. Generate key metrics, including average fare, total daily trips, and average trip duration. Stay accessible through standard database clients — DataGrip, DbSchema, whatever the analyst already has open
+1. Pull trip data from the NYC Open Data API
+2. Store everything in a structured data warehouse thats clean and easy to query
+3. Let users filter the data by date, time, pickup and dropoff location
+4. Calculate metrics like average fare, total trips per day and average trip duration
+5. Be accessible through a database client like DataGrip or DbSchema
 
-The primary value lies in the data structure rather than in specialized tooling.
-
----
 
 Data Requirements
 
-* Dataset: NYC Yellow Taxi Trip Data
-* Source: data.cityofnewyork.us
-* Ingestion method: NYC Open Data API via Socrata
-* Scale: 100,000+ rows, 15+ columns
-* Data dictionary: (link coming soon)
-
----
+- Dataset: NYC Yellow Taxi Trip Data
+- Source: data.cityofnewyork.us
+- How we get it: NYC Open Data API via Socrata
+- Size: 100,000+ rows, 15+ columns
+- Data Dictionary: link coming soon
 
 Information Architecture
 
 (diagram will be added)
 
-Data is ingested from the NYC Open Data API and stored in the warehouse. Analysts access and query data exclusively through the warehouse, ensuring the raw source remains unaltered and analyses remain consistent.
-
----
+Data comes in from the NYC Open Data API and gets stored in the warehouse. Analysts only interact with the warehouse, not the raw data directly. This way the original source stays untouched and results stay consistent.
 
 Data Architecture
 
 (diagram will be added)
 
-The data pipeline consists of three main stages: API extraction, data cleaning, and warehouse loading. The warehouse employs a star schema, featuring a central fact table surrounded by dimension tables. This familiar structure facilitates efficient querying and simplifies maintenance.
+The pipeline has three main steps: pulling the data from the API, cleaning it up, and loading it into the warehouse. The warehouse uses a star schema which basically means one central fact table surrounded by dimension tables. Its a simple structure that makes querying faster and easier to maintain.
 
----
+Dimensional Modeling
 
-The star schema is organized around a single fact table that records the details of each trip. Dimension tables provide contextual information, addressing aspects such as who, when, and where.n, or where.
+The star schema is built around a single fact table that stores the details of each trip. The dimension tables give context around each trip, like when it happened, where it went, and who was involved.
 
 Fact Table: fact_trips
 
-Column	Type	Description	Column 4
-trip_id (SK)	INT	Surrogate key	
-date_id (FK)	INT	Links to dim_date	
-location_id (FK)	INT	Links to dim_location	
-passenger_id (FK)	INT	Links to dim_passenger	
-vendor_id (FK)	INT	Links to dim_vendor	
-trip_distance	FLOAT	Distance in miles	
-fare_amount	FLOAT	Base fare charged	
-tip_amount	FLOAT	Tip amount	
-total_amount	FLOAT	Total charged	
-trip_duration	INT	Duration in minutes	
+| Column | Type | Description |
+|--------|------|-------------|
+| trip_id (SK) | INT | surrogate key |
+| date_id (FK) | INT | links to dim_date |
+| location_id (FK) | INT | links to dim_location |
+| passenger_id (FK) | INT | links to dim_passenger |
+| vendor_id (FK) | INT | links to dim_vendor |
+| trip_distance | FLOAT | distance in miles |
+| fare_amount | FLOAT | base fare charged |
+| tip_amount | FLOAT | tip amount |
+| total_amount | FLOAT | total charged |
+| trip_duration | INT | duration in minutes |
 
+dim_date: date_id, date, year, month, day, hour, day_of_week
 
-dim_date — date_id, date, year, month, day, hour, day_of_week
+dim_location: location_id, pickup_longitude, pickup_latitude, dropoff_longitude, dropoff_latitude, borough
 
-dim_location — location_id, pickup_longitude, pickup_latitude, dropoff_longitude, dropoff_latitude, borough
+dim_passenger: passenger_id, passenger_count
 
-dim_passenger — passenger_id, passenger_count
-
-dim_vendor — vendor_id, vendor_name
+dim_vendor: vendor_id, vendor_name
