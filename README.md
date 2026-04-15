@@ -2,26 +2,20 @@ CIS4400 - Homework 1, Alex Temurov, NYC Yellow Taxi Trip Data
 
 Business Requirements
 
-Every night in New York City, thousands of yellow taxis are picking up and dropping off passengers across the city. A lot of the time though, drivers are sitting idle in areas where theres not much demand, while other areas are packed. These patterns are not random and can actually be tracked through the data.
+Every day in New York City, thousands of yellow taxis transport people citywide. However, often drivers sit idle in low-demand areas while others are crowded, these are patterns that can  be tracked through the data.
 
-This project is about building a data warehouse using NYC yellow taxi trip records. The goal is to give taxi operators and city planners a way to better understand how people are moving around the city so they can make smarter decisions.
+This project focuses on designing a data warehouse for NYC yellow taxi trip records and optimizing taxi operations and city planning. The primary objective is to equip taxi drivers and city planners with valuable insights into citywide mobility patterns for more accurate planning and operations.
 
-Three main questions drive this project:
+Three are three main questions for this project:
 
-1. When and where is demand the highest? The idea is to find the specific hours, days and locations where taxis are most needed, so dispatchers can position drivers ahead of time instead of reacting after the fact.
-2. How do fares change depending on the area? Trips from Midtown to JFK are very different from trips in the Bronx for example. Looking at fare amounts by neighborhood and time of day can reveal patterns that arent always obvious.
-3. Are some routes actually faster or just shorter? By looking at average trip duration on different routes we can identify where traffic is consistently causing delays, which is useful for both drivers and urban planners.
+The primary focus is: When and where does taxi demand is the highest? The goal is to identify the specific hours, days, and locations where taxis are most needed for the regular people, so dispatchers can position drivers in advance rather than reposition themselves after or during the busy hours. How do prices change depending on the area? Trips from Midtown to JFK are very different from trips in the Bronx for example. Looking at fare amounts by neighborhood and time of day can reveal patterns that arent always obvious,
+and finally are some routes actually faster or just shorter? By looking at average trip duration on different routes we can identify where traffic is consistently causing delays, which is useful for both drivers and city planners.
 
 Functional Requirements
 
 To make this analysis possible, the system needs to be able to do the following:
 
-1. Pull trip data from the NYC Open Data API
-2. Store everything in a structured data warehouse thats clean and easy to query
-3. Let users filter the data by date, time, pickup and dropoff location
-4. Calculate metrics like average fare, total trips per day and average trip duration
-5. Be accessible through a database client like DataGrip or DbSchema
-
+Pull trip data from the NYC Open Data API, store everything in a structured data warehouse thats clean and easy to query, let users filter the data by date, time, pickup and dropoff location, calculate metrics like average fare, total trips per day and average trip duration and be accessible through a database client like DataGrip or DbSchema
 
 Data Requirements
 
