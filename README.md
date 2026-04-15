@@ -49,6 +49,7 @@ The star schema is built around a single fact table that stores the details of e
 
 Fact Table: fact_trips
 
+Fact Table: fact_trips
 | Column | Type | Description |
 |--------|------|-------------|
 | trip_id (SK) | INT | surrogate key |
@@ -56,11 +57,11 @@ Fact Table: fact_trips
 | location_id (FK) | INT | links to dim_location |
 | passenger_id (FK) | INT | links to dim_passenger |
 | vendor_id (FK) | INT | links to dim_vendor |
-| trip_distance | FLOAT | distance in miles |
-| fare_amount | FLOAT | base fare charged |
+| trip_distance | FLOAT | distance of the trip in miles |
+| fare_amount | FLOAT | the fare charged |
 | tip_amount | FLOAT | tip amount |
-| total_amount | FLOAT | total charged |
-| trip_duration | INT | duration in minutes |
+| total_amount | FLOAT | total amount charged |
+| trip_duration | INT | how long the trip took in minutes |
 
 dim_date: date_id, date, year, month, day, hour, day_of_week
 
