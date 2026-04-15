@@ -29,7 +29,7 @@ Data Requirements
 - Source: data.cityofnewyork.us
 - How we get it: NYC Open Data API via Socrata
 - Size: 100,000+ rows, 15+ columns
-- Data Dictionary: link coming soon
+- Data Dictionary: https://docs.google.com/spreadsheets/d/1cMTGQjr-mmM-cfJAtE5sfrETlCic-Q2KVG0O6Gwc7Yo/edit?usp=sharing
 
 Information Architecture
 
