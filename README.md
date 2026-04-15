@@ -33,13 +33,13 @@ Data Requirements
 
 Information Architecture
 
-(diagram will be added)
+![Information Architecture](Untitled%20Diagram.drawio.png)
 
 Data comes in from the NYC Open Data API and gets stored in the warehouse. Analysts only interact with the warehouse, not the raw data directly. This way the original source stays untouched and results stay consistent.
 
 Data Architecture
 
-(diagram will be added)
+![Data Architecture](Untitled%20Diagram.drawio%20(1).png)
 
 The pipeline has three main steps: pulling the data from the API, cleaning it up, and loading it into the warehouse. The warehouse uses a star schema which basically means one central fact table surrounded by dimension tables. Its a simple structure that makes querying faster and easier to maintain.
 
