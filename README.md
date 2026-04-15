@@ -8,7 +8,7 @@ Business Requirements
 
 Each night in New York City, thousands of yellow taxis traverse the grid, picking up and dropping off passengers, or remaining idle in less optimal locations while demand exists nearby. These inefficiencies are not random; they follow discernible patterns that are evident in the data.
 
-This project involves constructing a data warehouse based on NYC yellow taxi trip records. The objective is to provide taxi operators and city planners with a clear, queryable representation of passenger movement, enabling proactive vehicle positioning to meet demand efficiently.
+This project involves building a data warehouse from NYC yellow taxi trip records. The objective is to provide taxi operators and city planners with a clear, queryable representation of passenger movement, enabling proactive vehicle positioning to efficiently meet demand.
 
 Three questions drive everything:
 
@@ -22,9 +22,9 @@ Functional Requirements
 
 To enable this analysis, the system must reliably perform five key functions:
 
-1. Pull live trip data directly from the Store the data in a structured warehouse that is organized, clean, and easily queryabled, clean, queryable
-2. Enable users to filter data by date, time, and pickup or dropoff location without accessing the raw source
-3. PGenerate key metrics, including average fare, total daily trips, and average trip durationStay accessible through standard database clients — DataGrip, DbSchema, whatever the analyst already has open
+1. Pull live trip data directly from the Store and store it in a structured warehouse that is organized, clean, and easily queryable.
+2. Enable users to filter data by date, time, and pickup or dropoff location without accessing the raw source.
+3. Generate key metrics, including average fare, total daily trips, and average trip duration. Stay accessible through standard database clients — DataGrip, DbSchema, whatever the analyst already has open
 
 The primary value lies in the data structure rather than in specialized tooling.
 
@@ -56,22 +56,21 @@ The data pipeline consists of three main stages: API extraction, data cleaning, 
 
 ---
 
-DimensionaThe star schema is organized around a single fact table that records the details of each trip. Dimension tables provide contextual information, addressing aspects such as who, when, and where.n, or where.
+The star schema is organized around a single fact table that records the details of each trip. Dimension tables provide contextual information, addressing aspects such as who, when, and where.n, or where.
 
 Fact Table: fact_trips
 
-| Column | Type | Description |
-|--------|------|-------------|
-| trip_id (SK) | INT | surrogate key |
-| date_id (FK) | INT | links to dim_date |
-| location_id (FK) | INT | links to dim_location |
-| passenger_id (FK) | INT | links to dim_passenger |
-| vendor_id (FK) | INT | links to dim_vendor |
-| trip_distance | FLOAT | distance in miles |
-| fare_amount | FLOAT | base fare charged |
-| tip_amount | FLOAT | tip amount |
-| total_amount | FLOAT | total charged |
-| trip_duration | INT | duration in minutes |
+Column	Type	Description	Column 4
+trip_id (SK)	INT	Surrogate key	
+date_id (FK)	INT	Links to dim_date	
+location_id (FK)	INT	Links to dim_location	
+passenger_id (FK)	INT	Links to dim_passenger	
+vendor_id (FK)	INT	Links to dim_vendor	
+trip_distance	FLOAT	Distance in miles	
+fare_amount	FLOAT	Base fare charged	
+tip_amount	FLOAT	Tip amount	
+total_amount	FLOAT	Total charged	
+trip_duration	INT	Duration in minutes	
 
 
 dim_date — date_id, date, year, month, day, hour, day_of_week
