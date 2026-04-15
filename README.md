@@ -48,8 +48,6 @@ Dimensional Modeling
 The star schema is built around a single fact table that stores the details of each trip. The dimension tables give context around each trip, like when it happened, where it went, and who was involved.
 
 Fact Table: fact_trips
-
-Fact Table: fact_trips
 | Column | Type | Description |
 |--------|------|-------------|
 | trip_id (SK) | INT | surrogate key |
